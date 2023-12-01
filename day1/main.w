@@ -1,44 +1,13 @@
 bring cloud;
 bring fs;
 
-inflight class Collection {
-    items: Array<str>;
-
-    new(items: Array<str>) {
-        this.items = items;
-    }
-
-    reverse(): Collection {
-        let result = MutArray<str>[];
-
-        for i in this.items.length - 1..0 {
-            result.push(this.items.at(i));
-        }
-
-        return new Collection(result.copy());
-    }
-
-    inflight all(): Array<str> {
-        return this.items;
-    }
-
-    pub inflight length(): num {
-        return this.items.length;
-    }
-
-    pub inflight at(index: num): str {
-        return this.items.at(index);
-    }
-}
-
-
 let findNumber = inflight (line: str, index: num): num? => {
-    let numbers = new Collection([
+    let numbers = [
         "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
         "1", "2", "3", "4", "5", "6", "7", "8", "9",
-    ]);
+    ];
 
-    for wordIndex in 0..numbers.length() {
+    for wordIndex in 0..numbers.length {
         let word = numbers.at(wordIndex);
 
         if line.substring(index).startsWith(word) {
